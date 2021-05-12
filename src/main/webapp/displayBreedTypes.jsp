@@ -1,4 +1,5 @@
 <%@page import="java.util.* " %>
+<%@page import="in.selva.model.*" %>
 <%@page import="in.selva.service.*" %>
 <!DOCTYPE html>
 <html>
@@ -21,7 +22,7 @@
      </thead>
      <tbody>
       <%
-      List<BreedTypes> breedTypes = DisplayBreedTypes.addBreedTypesDetails();
+      List<BreedTypes> breedTypes = BreedService.getBreedTypes();
       int i=0;
       for(BreedTypes breedType : breedTypes){
     	  i++;
@@ -34,6 +35,8 @@
      <% } %>
      </tbody>
    </table>
+   <!--  TODO: Only Admin should be able to view this link -->
+				<a href="AddBreedTypes.jsp" >Add Breed Types</a>
 </form>
 		
 	</main>
