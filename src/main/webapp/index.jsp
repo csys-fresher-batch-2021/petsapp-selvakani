@@ -1,6 +1,6 @@
 <html>
 <head>
-<title>MyApp</title>
+<title>Online Pets Shop App</title>
 </head>
 <body>
 	<jsp:include page="header.jsp"></jsp:include>
