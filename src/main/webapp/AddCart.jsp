@@ -6,17 +6,17 @@
 <%@ page import="in.selva.dao.BreedDao"%>
 <%@ page import="in.selva.service.*"%>
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
 <meta charset="ISO-8859-1">
-<title>Online Pets App</title>
+<title>Add to Cart</title>
 </head>
 <body>
 	<jsp:include page="header.jsp"></jsp:include>
 	<main class="container-fluid">
-		<form action="Login.jsp" method="post">
+		<form method="post">
 
-			<h3>Books</h3>
+			<h3>Breed Types</h3>
 			<table class="table table-bordered">
 				<caption></caption>
 				<thead>
@@ -24,7 +24,7 @@
 						<th scope="col">S.NO</th>
 						<th scope="col">Breed Type</th>
 						<th scope="col">Count</th>
-						<th scope="col">Cost/Dog</th>
+						<th scope="col">Price/Dog</th>
 
 						<%
 						BreedDao breedDao = new BreedDao();
@@ -37,11 +37,11 @@
 					<tr>
 						<td><%=i%></td>
 						<td><%=breedDetails.getBreedType()%></td>
-						<td><%=breedDetails.getCost()%></td>
+						<td><%=breedDetails.getCount()%></td>
 						<td><%=breedDetails.getCost()%></td>
 						<td><a
-							href="DeleteBreedServlet?breedType=<%=breedDetails.getBreedType()%>"
-							class="btn btn-danger">Delete</a></td>
+							href="OrderBreedServlet?bookName=<%=breedDetails.getBreedType()%>"
+							class="btn btn-success">Add to Cart</a></td>
 					</tr>
 					<%
 					}
@@ -49,10 +49,10 @@
 				</thead>
 			</table>
 
-			<button type="submit">Order</button>
+
 		</form>
 
-		<!-- <a href="AddBreedTypes.jsp">Add Breed Type</a> -->
+		<a href="ViewCart.jsp" class="btn btn-success">View Cart</a>
 	</main>
 </body>
 </html>

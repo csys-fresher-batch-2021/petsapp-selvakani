@@ -13,36 +13,45 @@ import javax.servlet.http.HttpServletResponse;
 /**
  * Servlet implementation class AddBreedTypes
  */
+
 @WebServlet("/AddBreedTypes")
-public class AddBreedTypes extends HttpServlet {
+
+public class AddBreedServlet extends HttpServlet 
+{
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public AddBreedTypes() {
+	
+    public AddBreedServlet()
+    {
         super();
-        // TODO Auto-generated constructor stub
+       
     }
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException 
+	{
+		
 		PrintWriter out = response.getWriter();
-		System.out.println("AddProductServlet");
+		System.out.println("AddBreedServlet");
 		
 		// Step 1: Get Form Values
 		
 		String breedType = request.getParameter("breedType");
 		out.println(breedType);
+		int count=Integer.parseInt(request.getParameter("count"));;
+		out.println(count);
 		int price = Integer.parseInt(request.getParameter("price"));
 		out.println(price);
 		
-		// Step 2: Call Service => add Product
+		// Step 2: Call Service => Add breed types
 		
-		boolean isAdded = BreedService.addBreedType(breedType,price);
+		
+		boolean isAdded = BreedService.addBreed(breedType,count,price);
 		
 		// Step 3: Decide to which page we should redirect ?
 		
