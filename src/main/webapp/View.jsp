@@ -22,7 +22,7 @@
 			<thead>
 				<tr>
 					<th scope="col">S.NO</th>
-					<th scope="col">Book Name</th>
+					<th scope="col">Breed Name</th>
 					<th scope="col">Count</th>
 					<th scope="col">Cost/Dog</th>
 					

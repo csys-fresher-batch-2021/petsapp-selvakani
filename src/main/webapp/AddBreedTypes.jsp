@@ -9,7 +9,7 @@
 <body>
 	<jsp:include page="header.jsp"></jsp:include>
 	<main class="container-fluid">
-		<h1>ADD BOOKS</h1>
+		<h3><I>Add Breed Details</I></h3>
 		<form action="AddBreedServlet" method="post">
 			<table>
 				<caption>Breed Details</caption>
@@ -30,7 +30,7 @@
 				</tr>
 
 			</table>
-			<button type="submit" class="btn btn-success">SUBMIT</button>
+			<button type="submit" class="btn btn-success">Add Breed</button>
 		</form>
 		<br /> <a href="View.jsp" class="btn btn-primary">View</a> <a
 			href="displayBreedTypes.jsp" class="btn btn-danger">Delete</a>

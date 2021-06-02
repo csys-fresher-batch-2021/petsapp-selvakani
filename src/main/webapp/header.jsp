@@ -46,7 +46,7 @@ String loggedInUsername = (String) session.getAttribute("LOGGED_IN_USER");
 				<li class="nav-item dropdown">
 					<div class="dropdown">
 						<a class="nav-link dropdown-toggle" href="#" id="dropdownId"
-							data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Cost</a>
+							data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Search</a>
 						<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
 							<a class="dropdown-item" href="SearchByCostServlet?cost=1">Below
 								10000</a> <a class="dropdown-item" href="SearchByCostServlet?cost=2">above
