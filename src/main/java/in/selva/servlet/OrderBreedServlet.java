@@ -33,7 +33,7 @@ public class OrderBreedServlet extends HttpServlet
 
 		try 
 		{
-			String breedType = request.getParameter("breedType");
+			String breedType = request.getParameter("breedName");
 			int count = BreedService.getCount(breedType);
 			double cost = BreedService.getCost(breedType);
 			boolean added = false;
@@ -45,7 +45,7 @@ public class OrderBreedServlet extends HttpServlet
 				String role = (String) sess.getAttribute("JOB");
 				if (added && role != "SEARCHING")
 				{
-					response.sendRedirect("AddCart.jsp");
+					response.sendRedirect("ViewCart.jsp");
 				} 
 				else if (added && role == "SEARCHING")
 				{

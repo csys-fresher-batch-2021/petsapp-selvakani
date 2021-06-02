@@ -67,6 +67,7 @@ public class OrderService
 	 * @param breedType
 	 * @return
 	 */
+	
 	public static boolean deleteBreed(String breedType) 
 	{
 		boolean isDeleted = false;
@@ -90,7 +91,7 @@ public class OrderService
 		return isDeleted;
 	}
 
-	public static boolean checkValidNoOfBooks(String breedType, int count) 
+	public static boolean checkValidCount(String breedType, int count) 
 	{
 		boolean present = OrderService.isPresent(breedType);
 		boolean validBreed = false;

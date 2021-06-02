@@ -40,7 +40,7 @@
 						<td><%=breedDetails.getCount()%></td>
 						<td><%=breedDetails.getCost()%></td>
 						<td><a
-							href="OrderBreedServlet?bookName=<%=breedDetails.getBreedType()%>"
+							href="OrderBreedServlet?breedName=<%=breedDetails.getBreedType()%>"
 							class="btn btn-success">Add to Cart</a></td>
 					</tr>
 					<%

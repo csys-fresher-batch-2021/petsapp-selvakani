@@ -16,7 +16,7 @@
 	<main class="container-fluid">
 		<form action="Login.jsp" method="post">
 
-			<h3>Books</h3>
+			<h3>Pets Paw </h3>
 			<table class="table table-bordered">
 				<caption></caption>
 				<thead>
