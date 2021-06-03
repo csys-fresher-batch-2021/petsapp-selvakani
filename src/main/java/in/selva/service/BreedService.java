@@ -50,7 +50,8 @@ public class BreedService
 		boolean isDeleted = false;
 		BreedTypes searchbreed = null;
 		List<BreedTypes> breeds = BreedDao.getBreed();
-		for (BreedTypes breed : breeds) {
+		for (BreedTypes breed : breeds) 
+		{
 			if (breed.getBreedType().equalsIgnoreCase(breedType))
 			{
 				searchbreed = breed;
@@ -160,10 +161,33 @@ public class BreedService
 				}
 			}
 		} 
+		
 		else if (breedType == 2) 
 		{
 			for (BreedTypes breed : BreedDao.getBreed()) {
-				if (breed.getCost() >= 15000) 
+				if (breed.getCost() <= 15000) 
+				{
+					costDetails.add(breed);
+					isAdd = true;
+				}
+			}
+		}
+		
+		else if (breedType == 3) 
+		{
+			for (BreedTypes breed : BreedDao.getBreed()) {
+				if (breed.getCost() <= 25000) 
+				{
+					costDetails.add(breed);
+					isAdd = true;
+				}
+			}
+		}
+		
+		else if (breedType == 4) 
+		{
+			for (BreedTypes breed : BreedDao.getBreed()) {
+				if (breed.getCost() >= 25000) 
 				{
 					costDetails.add(breed);
 					isAdd = true;
@@ -175,9 +199,9 @@ public class BreedService
 	}
 
 	/**
-	 * Add confirm ordered book details.
+	 * Add confirm ordered details.
 	 * 
-	 * @param bookName
+	 * @param breedType
 	 * @return
 	 */
 	

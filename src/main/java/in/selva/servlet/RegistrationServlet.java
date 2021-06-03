@@ -35,7 +35,7 @@ public class RegistrationServlet extends HttpServlet
 			
 			if(isAdded) 
 			{
-				response.sendRedirect("AdminLogin.jsp");
+				response.sendRedirect("UserLogin.jsp");
 				System.out.println("valid");
 			}
 			

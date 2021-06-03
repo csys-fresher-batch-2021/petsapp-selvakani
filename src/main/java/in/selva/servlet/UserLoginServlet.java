@@ -38,13 +38,13 @@ public class UserLoginServlet extends HttpServlet
 				HttpSession session = request.getSession();
 				session.setAttribute("LOGGED_IN_USER", userName);
 				session.setAttribute("ROLE", "USER");
-				response.sendRedirect("addCart.jsp");
+				response.sendRedirect("AddCart.jsp");
 				
 			}
 		}
 		catch(Exception e)
 		{
-			response.sendRedirect("Login.jsp?errorMessage=Invalid Login Credentials");
+			response.sendRedirect("UserLogin.jsp?errorMessage=Invalid Login Credentials");
 		}
 	}
 	}

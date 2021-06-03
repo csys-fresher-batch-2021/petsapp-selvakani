@@ -48,7 +48,7 @@
 					<td><form action="ConfirmOrderServlet" method="post"> <input type="number" name="noBreed"
 					placeholder="Enter Count" id="countId" required ></form></td>
 					<td><button type="submit" class="btn btn-success">Confirm Order</button></td>
-					<td><a href="DeleteBookServlet?bookName=<%=orderDetails.getBreedType() %>" class="btn btn-danger">Delete</a></td>
+					<td><a href="DeleteBreedServlet?breedName=<%=orderDetails.getBreedType() %>" class="btn btn-danger">Delete</a></td>
 				</tr>
 				<%
 				}

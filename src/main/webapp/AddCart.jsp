@@ -24,7 +24,7 @@
 						<th scope="col">S.NO</th>
 						<th scope="col">Breed Type</th>
 						<th scope="col">Count</th>
-						<th scope="col">Price/Dog</th>
+						<th scope="col">Price(Rs)/Dog</th>
 
 						<%
 						BreedDao breedDao = new BreedDao();
@@ -40,7 +40,7 @@
 						<td><%=breedDetails.getCount()%></td>
 						<td><%=breedDetails.getCost()%></td>
 						<td><a
-							href="OrderBreedServlet?bookName=<%=breedDetails.getBreedType()%>"
+							href="OrderBreedServlet?breedName=<%=breedDetails.getBreedType()%>"
 							class="btn btn-success">Add to Cart</a></td>
 					</tr>
 					<%

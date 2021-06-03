@@ -26,7 +26,7 @@ public class DeleteBreedServlet extends HttpServlet
     {
 		try 
 		{
-			String breedType = request.getParameter("breedType");
+			String breedType = request.getParameter("breedName");
 			HttpSession sess = request.getSession();
 			boolean isDeleted = false;
 			boolean isOrderDeleted = false;

@@ -4,14 +4,15 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>USER LOGIN</title>
+<title>User Login</title>
 </head>
 <body>
 	<jsp:include page="header.jsp"></jsp:include>
 	<main class="container-fluid">
+	<h3>User Login</h3>
 		<form action="UserLoginServlet" method="post">
 			<table>
-				<caption>USER LOGIN</caption>
+				<caption>User Login</caption>
 				<tr>
 					<th scope="col">User Name</th>
 					<td><input type="text" name="userName"

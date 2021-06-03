@@ -42,10 +42,11 @@ public class UserService
  	{
  		boolean isValidUser = false;
     	 List<User> users = UserDao.getUser();
- 		for (User userDetails : users) {
+ 		for (User userDetails : users) 
+ 		{
  			if(userDetails.getName().equals(userName) && userDetails.getPassword().equals(userPassCode)) {
  				isValidUser = true;
- 			}
+ 		}
  			
  		}
     	 return isValidUser;

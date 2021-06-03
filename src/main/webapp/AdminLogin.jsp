@@ -4,11 +4,12 @@
 <html lang="en">
 <head>
 <meta charset="ISO-8859-1">
-<title>Login</title>
+<title>Admin Login</title>
 </head>
 <body>
 	<jsp:include page="header.jsp"></jsp:include>
 	<main class="container-fluid">
+	<h3>Admin Login</h3>
 		<form action="LoginServlet" method="post">
 			<table>
 				<caption>Admin Login</caption>
@@ -23,7 +24,7 @@
 						placeholder="Enter password" id="passId" required></td>
 				</tr>
 			</table>
-			<button type="submit" class="btn btn-primary">SUBMIT</button>
+			<button type="submit" class="btn btn-primary">Submit</button>
 		</form>
 	</main>
 </body>

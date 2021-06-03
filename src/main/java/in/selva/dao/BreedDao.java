@@ -11,14 +11,14 @@ public class BreedDao
 	 */
 	
 	private static final List<BreedTypes> breeds = new ArrayList<>();
-	
+	 
 	/**
 	 * Store Breed Details.
 	 */
 
 	static 
 	{
-		breeds.add(new BreedTypes("Shihtzu", 4, 3500));
+		breeds.add(new BreedTypes("Shihtzu", 4, 35000));
 		breeds.add(new BreedTypes("Pomeranian", 5, 10000));
 		breeds.add(new BreedTypes("German Shepherdd", 3, 15000));
 		breeds.add(new BreedTypes("Doberman", 3, 17000));
@@ -41,7 +41,7 @@ public class BreedDao
 	public void addBreed(String breedType, int count, double cost)
 	{
 
-		type.add(new BreedTypes(breedType, count, cost));
+		breeds.add(new BreedTypes(breedType, count, cost));
 	}
 
 	/**

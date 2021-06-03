@@ -29,7 +29,7 @@ public class LoginServlet extends HttpServlet
 		
 		//Step 2: call Service
 		
-		boolean isValid = "admin".equals(username) && "admin".equals(password);
+		boolean isValid = "AdminSK".equals(username) && "AdminSK@25".equals(password);
 		
 		if(isValid) 
 		{

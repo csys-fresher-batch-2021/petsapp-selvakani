@@ -22,7 +22,7 @@
 				<tr>
 					<th scope="col">S.No</th>
 					<th scope="col">Breed Type</th>
-					<th scope="col">Price(Rs)/Quantity</th>
+					<th scope="col">Price(Rs)/Dog</th>
 					
 					<%
 					
@@ -38,7 +38,7 @@
 					<td><%=breedDetails.getBreedType()%></td>
 					<td><%=breedDetails.getCount()%></td>
 					<td><%=breedDetails.getCost()%></td>
-					<td><a href="DeleteBreedServlet?bookName=<%=breedDetails.getBreedType()%>" class="btn btn-danger">Delete</a></td>
+					<td><a href="DeleteBreedServlet?breedName=<%=breedDetails.getBreedType()%>" class="btn btn-danger">Delete</a></td>
 				</tr>
 				<%
 				}
