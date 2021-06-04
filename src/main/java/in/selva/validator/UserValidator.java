@@ -13,10 +13,12 @@ public class UserValidator
 	{
 		boolean valid = false;
 		String regex = "[a-zA-Z]+\\.?";
-		if (name.matches(regex)) {
+		if (name.matches(regex))
+		{
 			valid = true;
 		}
-		else {
+		else 
+		{
 			valid = false;
 			System.out.println("Invalid Name");
 		}

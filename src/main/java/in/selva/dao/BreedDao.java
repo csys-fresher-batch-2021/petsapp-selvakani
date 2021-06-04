@@ -20,7 +20,7 @@ public class BreedDao
 	{
 		breeds.add(new BreedTypes("Shihtzu", 4, 35000));
 		breeds.add(new BreedTypes("Pomeranian", 5, 10000));
-		breeds.add(new BreedTypes("German Shepherdd", 3, 15000));
+		breeds.add(new BreedTypes("German Shepherd", 3, 15000));
 		breeds.add(new BreedTypes("Doberman", 3, 17000));
 	}
 	

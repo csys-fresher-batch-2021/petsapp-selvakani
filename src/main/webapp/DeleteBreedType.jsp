@@ -14,7 +14,7 @@
 <body>
 <jsp:include page="header.jsp"></jsp:include>
 	<main class="container-fluid">
-<form action="login.jsp" method="post">
+<form action="UserLogin.jsp" method="post">
 		<h3>Pets Paw</h3>
 		<table class="table table-bordered">
 			<caption></caption>
@@ -38,7 +38,9 @@
 					<td><%=breedDetails.getBreedType()%></td>
 					<td><%=breedDetails.getCount()%></td>
 					<td><%=breedDetails.getCost()%></td>
-					<td><a href="DeleteBreedServlet?breedName=<%=breedDetails.getBreedType()%>" class="btn btn-danger">Delete</a></td>
+
+					<td><a href="DeleteBreedServlet?breedName=<%=breedDetails.getBreedType()%>" class="btn btn-danger">Delete</a></td
+					<td><a href="DeleteBreedServlet?breedName=<%=breedDetails.getBreedType()%>" class="btn btn-danger">Delete Breed</a></td>
 				</tr>
 				<%
 				}

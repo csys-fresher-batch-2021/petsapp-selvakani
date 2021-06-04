@@ -90,8 +90,6 @@ public class BreedService
 
 	}
 
-	
-
 	/**
 	 * Get Breed Count using breed name.
 	 * 
@@ -117,6 +115,7 @@ public class BreedService
 
 	/**
 	 * Get cost using breed name.
+	 * 
 	 * @param breedType
 	 * @return
 	 */
@@ -136,9 +135,7 @@ public class BreedService
 		return cost;
 
 	}
-
 	
-
 	/**
 	 * Add search breed details.
 	 * 
@@ -224,17 +221,13 @@ public class BreedService
 	public static boolean confirmBill(String breedType, int count) {
           boolean confirm = false;
          // List<BreedTypes> bill = BreedDao.getBill();
-        boolean valid = OrderService.checkValidNoOfBooks(breedType,count);
+        boolean valid = OrderService.checkValidCount(breedType,count);
   		if(valid) 
   		{
   			
   		}
   		
           return confirm;
-
-		
-	}
-
 	
-
+	}
 }

@@ -37,6 +37,7 @@ public class RegistrationServlet extends HttpServlet
 			{
 				response.sendRedirect("UserLogin.jsp");
 				System.out.println("valid");
+				System.out.println("Valid");
 			}
 			
 	    }

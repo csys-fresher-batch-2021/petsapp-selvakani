@@ -46,6 +46,7 @@ public class DeleteBreedServlet extends HttpServlet
 					response.sendRedirect("AddBreedTypes.jsp?errorMessage=" + errorMessage);
 				}
 			} 
+			
 			else 
 			{
 				isOrderDeleted = OrderService.deleteBreed(breedType);
