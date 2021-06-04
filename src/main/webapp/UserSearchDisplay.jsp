@@ -33,7 +33,7 @@
 					<th scope="col">S.NO</th>
 					<th scope="col">Breed Type</th>
 					<th scope="col">Count</th>
-					<th scope="col">Cost/Dog</th>
+					<th scope="col">Price(Rs)/Dog</th>
 					
 					<%
 					BreedDao breedDao = new BreedDao();
@@ -70,7 +70,7 @@
 					<th scope="col">S.NO</th>
 					<th scope="col">Breed Type</th>
 					<th scope="col">Count</th>
-					<th scope="col">Cost/Dog</th>
+					<th scope="col">Price(Rs)/Dog</th>
 					
 					<%
 					BreedDao breedDao = new BreedDao();

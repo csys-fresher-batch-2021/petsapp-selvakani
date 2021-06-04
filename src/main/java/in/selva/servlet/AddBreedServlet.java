@@ -1,72 +1,63 @@
 package in.selva.servlet;
 
-import in.selva.service.*;
 import java.io.IOException;
-import java.io.PrintWriter;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-/**
- * Servlet implementation class AddBreedTypes
- */
+import in.selva.service.BreedService;
+import in.selva.validator.BreedValidator;
 
-@WebServlet("/AddBreedTypes")
+/**
+ * Servlet implementation class AddBooksServlet
+ */
+@WebServlet("/AddBreedServlet")
 
 public class AddBreedServlet extends HttpServlet 
 {
 	private static final long serialVersionUID = 1L;
-       
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-	
-    public AddBreedServlet()
-    {
-        super();
-       
-    }
 
 	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
+	 *      response)
 	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException 
-	{
+	@Override
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		try {
+			String breedName = request.getParameter("breedName");
+			boolean isValidName = BreedValidator.isBreedNameValid(breedName);
+			String count = request.getParameter("count");
+			int countNo = Integer.parseInt(count);
+			boolean validCount = BreedValidator.isValidNumber(countNo);
+			String price = request.getParameter("cost");
+			double cost = Double.parseDouble(price);
+			boolean validCost = BreedValidator.isCostValid(cost);
+
+			boolean isAdded = false;
+			if (isValidName && validCount && validCost) 
+			{
+
+				isAdded = BreedService.addBreed(breedName, countNo, cost);
+				if (isAdded)
+				{
+					String message="Successfully Added Breed Details";
+					response.sendRedirect("displayBreedTypes.jsp?Message : "+message );
+				} 
+				else 
+				{
+					String errorMessage = "Unable to add Books ";
+					
+					response.sendRedirect("AddBreedTypes.jsp?errorMessage=" + errorMessage);
+				}
+			}
+              
+		} catch (Exception e) {
+			response.sendRedirect("AddBreedTypes.jsp?errorMessage=Not able to add");
 		
-		PrintWriter out = response.getWriter();
-		System.out.println("AddBreedServlet");
-		
-		// Step 1: Get Form Values
-		
-		String breedType = request.getParameter("breedType");
-		out.println(breedType);
-		int count=Integer.parseInt(request.getParameter("count"));;
-		out.println(count);
-		int price = Integer.parseInt(request.getParameter("price"));
-		out.println(price);
-		
-		// Step 2: Call Service => Add breed types
-		
-		
-		boolean isAdded = BreedService.addBreed(breedType,count,price);
-		
-		// Step 3: Decide to which page we should redirect ?
-		
-		if (isAdded)
-		{
-			response.sendRedirect("displayBreedTypes.jsp");
-		} 
-		else 
-		{
-			String errorMessage = "Unable to Add Breed Types ";
-			response.sendRedirect("AddBreedTypes.jsp?errorMessage=" + errorMessage);
 		}
-		
+
 	}
-
 }
-
-

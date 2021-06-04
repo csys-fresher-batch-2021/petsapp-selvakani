@@ -9,7 +9,10 @@
 <body>
 	<jsp:include page="header.jsp"></jsp:include>
 	<main class="container-fluid">
+		<h1>Add Breed Details</h1>
+
 		<h3><I>Add Breed Details</I></h3>
+
 		<form action="AddBreedServlet" method="post">
 			<table>
 				<caption>Breed Details</caption>

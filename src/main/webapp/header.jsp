@@ -26,7 +26,7 @@ String loggedInUsername = (String) session.getAttribute("LOGGED_IN_USER");
 		<div class="collapse navbar-collapse" id="collapsibleNavId">
 			<ul class="navbar-nav mr-auto mt-2 mt-lg-0">
 				<li class="nav-item active"><a class="nav-link"
-					href="index.jsp">HOME <span class="sr-only">(current)</span></a></li>
+					href="index.jsp">Home <span class="sr-only">(current)</span></a></li>
 				<li class="nav-item">
 					<%
 					if (loggedInAdminname != "Admin")
@@ -41,16 +41,19 @@ String loggedInUsername = (String) session.getAttribute("LOGGED_IN_USER");
  					%>
 				</li>
 				<%
-				if (loggedInAdminname != "Admin") {
+				if (loggedInAdminname != "Admin")
+				{
 				%>
 				<li class="nav-item dropdown">
 					<div class="dropdown">
 						<a class="nav-link dropdown-toggle" href="#" id="dropdownId"
-							data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Search</a>
+							data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Search by Cost</a>
 						<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-							<a class="dropdown-item" href="SearchByCostServlet?cost=1">Below
-								10000</a> <a class="dropdown-item" href="SearchByCostServlet?cost=2">above
-								10000</a>
+							<a class="dropdown-item" href="SearchByCostServlet?cost=1">Below 10000</a>
+							<a class="dropdown-item" href="SearchByCostServlet?cost=2">Below 15000</a>
+							<a class="dropdown-item" href="SearchByCostServlet?cost=3">Below 25000</a>
+							<a class="dropdown-item" href="SearchByCostServlet?cost=4">above 25000</a>
+							
 						</div>
 					</div>
 				</li>

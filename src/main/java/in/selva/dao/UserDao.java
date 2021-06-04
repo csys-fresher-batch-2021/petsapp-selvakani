@@ -10,8 +10,10 @@ public class UserDao {
 		userReg.add(regObj);		
 	}
 	
+	
 	public static List<User> getUser() 
 	{
 		return userReg;
 	}
+	
 }

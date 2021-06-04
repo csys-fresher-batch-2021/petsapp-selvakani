@@ -11,7 +11,7 @@ public class BreedDao
 	 */
 	
 	private static final List<BreedTypes> breeds = new ArrayList<>();
-	
+	 
 	/**
 	 * Store Breed Details.
 	 */
@@ -41,7 +41,7 @@ public class BreedDao
 	public void addBreed(String breedType, int count, double cost)
 	{
 
-		type.add(new BreedTypes(breedType, count, cost));
+		breeds.add(new BreedTypes(breedType, count, cost));
 	}
 
 	/**

@@ -24,7 +24,6 @@ public class OrderDao
 	
 	public void addCart(String breedType, int count, double cost) 
 	{
-
 		orders.add(new Order(breedType, count, cost));
 	}
 
