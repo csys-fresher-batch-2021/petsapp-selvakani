@@ -13,7 +13,6 @@ public class BreedValidator {
 	 * @param number
 	 * @return
 	 */
-	
 	public static boolean isValidNumber(int number)
 	{
 		boolean valid = false;
@@ -54,6 +53,7 @@ public class BreedValidator {
 	 * @param name
 	 * @return
 	 */
+	
 	public static boolean isBreedNameValid(String name)
 	{
 		boolean valid = true;
