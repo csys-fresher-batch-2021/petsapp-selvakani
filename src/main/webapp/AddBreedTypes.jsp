@@ -34,6 +34,27 @@
 		</form>
 		<br /> <a href="View.jsp" class="btn btn-primary">View</a> <a
 			href="displayBreedTypes.jsp" class="btn btn-danger">Delete</a>
+			
+			<script>
+			
+			function validCost() {
+				let cost = document.querySelector("#costId").value;
+				if (cost>0)
+				{
+				} else {
+					alert("Invalid Cost");
+					event.preventDefault();
+				}
+			}
+			function ValidCount() {
+				let noOfBooks = document.querySelector("#countId").value;
+				if (noOfBooks>0) {
+				} else {
+					alert("Incorrect Count");
+					event.preventDefault();
+				}
+			}
+			</script>
 	</main>
 </body>
 </html>
