@@ -34,6 +34,7 @@ String loggedInUsername = (String) session.getAttribute("LOGGED_IN_USER");
 						%> <a class="nav-link"
 						href="View.jsp">Pets</a> <%
 					}
+					
 					else
 					{
  						%> <a class="nav-link" href="AddCart.jsp">Pets</a> <%

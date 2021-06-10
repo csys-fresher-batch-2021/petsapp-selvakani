@@ -42,12 +42,13 @@ public class RegistrationServlet extends HttpServlet {
 			{
 				System.out.println("Successfully Registered");
 				response.sendRedirect("UserLogin.jsp");
+				System.out.println("valid");
 			}
 		} 
 		catch (Exception e)
 		{
 			response.sendRedirect("UserRegistration.jsp?errorMessage=Invalid user details");
 		}
-
 	}
 }
+
