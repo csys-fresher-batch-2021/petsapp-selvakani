@@ -48,11 +48,8 @@
 					%>
 				</thead>
 			</table>
-
-
 		</form>
-
-		<a href="ViewCart.jsp" class="btn btn-success">View Cart</a>
+		<a href="DisplayOrder.jsp" class="btn btn-success">View Cart</a>
 	</main>
 </body>
 </html>

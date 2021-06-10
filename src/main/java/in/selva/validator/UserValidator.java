@@ -1,7 +1,6 @@
 package in.selva.validator;
 
-public class UserValidator 
-{
+public class UserValidator {
 	/**
 	 * Check whether name is valid
 	 * Name must contain character.
@@ -9,22 +8,19 @@ public class UserValidator
 	 * @param name
 	 * @return
 	 */
-	public boolean isNameValid(String name) 
-	{
+	public boolean isNameValid(String name) {
 		boolean valid = false;
-		String regex = "[a-zA-Z]+\\.?";
-		if (name.matches(regex))
-		{
+		String regex = "[a-zA-Z_ ]+\\.?";
+		if (name.matches(regex)) {
 			valid = true;
 		}
-		else 
-		{
+		else {
 			valid = false;
-			System.out.println("Invalid Name");
+			System.out.println("Invalid User Name");
+			
 		}
 		return valid;
 	}
-	
 	/**
 	 * Validating email id.
 	 * The email id must start with character.
@@ -36,26 +32,21 @@ public class UserValidator
 	 * @param email
 	 * @return
 	 */
-	
-	public boolean isEmailValid(String email)
-	{
+	public boolean isEmailValid(String email) {
 		boolean valid = false;
 		
-		  String regex = "^[a-zA-Z0-9_+&*-]+(?:\\."+ "[a-zA-Z0-9_+&*-]+)*@" +
-		  "(?:[a-zA-Z0-9-]+\\.)+[a-z" + "A-Z]{2,4}$";
-		
+		  String regex = "^[a-zA-Z0-9_+&*-]+(?:\\.+[a-zA-Z0-9_+&*-]+)*@" +
+		  "(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,7}$";
+		 
    	 if(email.matches(regex)) {
    		 valid = true;
    	 }
-   	 
-   	else 
-   	{
+   	else {
 		valid = false;
-		System.out.println("Invalid email");
+		System.out.println("Invalid Email");
 	}
    	   return valid;
 	}
-	
 	/**
      * Validating mobile number.
      * The mobile number length should be 10.
@@ -63,40 +54,34 @@ public class UserValidator
      * @param mobileNumber
      * @return
      */
-	
-	public boolean isMobileNumberValid(long mobile) 
-	{
+	public boolean isMobileNumberValid(long mobile) {
 		String number = String.valueOf(mobile);
 		boolean valid = false;
-		 if(number.length()==10)
-		 {
+		 if(number.length()==10) {
 			 valid = true;
 		 }
-		 else 
-		 {
+		 else {
 				valid = false;
 				System.out.println("Invalid mobile number");
-		}
+			}
 		return valid;
 	}
-	
 	/**
 	 * Check whether address is valid
 	 * Address may contain number and characters.
 	 * @param name
 	 * @return
 	 */
-	
-	public boolean isAddressValid(String address) 
-	{
+	public boolean isAddressValid(String address) {
 		boolean valid = false;
-		String regex = "[a-zA-Z0-9]+\\.?";
-		if (address.matches(regex)) {
+		String regex = "[a-zA-Z0-9_ ]+\\.?";
+		if (address.trim().matches(regex)) {
 			valid = true;
 		}
 		else {
 			valid = false;
 			System.out.println("Invalid Address");
+			
 		}
 		return valid;
 	}
@@ -107,23 +92,19 @@ public class UserValidator
 	 * @param pass
 	 * @return
 	 */
-	
-	public boolean isPasswordValid(String pass) 
-	{
+	public boolean isPasswordValid(String pass) {
 		boolean valid = false;
 		
 		  String regex = "^(?=.*[0-9])" + "(?=.*[a-z])(?=.*[A-Z])" + "(?=.*[@#$%^&+=])"
 		  + "(?=\\S+$).{8,20}$";
-		
-		 if(pass!=null && pass.matches(regex)) 
-		 {
+		 
+		 if(pass!=null && pass.matches(regex)) {
 			 valid = true;
 		 }
-		 else 
-		 {
+		 else {
 				valid = false;
-				System.out.println("Invalid password");
-		}
+				System.out.println("Invalid Password");
+			}
 		
 		return valid;
 	}

@@ -218,16 +218,18 @@ public class BreedService
 		return isAdd;
 	}
 
-	public static boolean confirmBill(String breedType, int count) {
-          boolean confirm = false;
-         // List<BreedTypes> bill = BreedDao.getBill();
-        boolean valid = OrderService.checkValidCount(breedType,count);
-  		if(valid) 
-  		{
-  			
-  		}
-  		
-          return confirm;
+	/**
+	 * Get breed details from database.
+	 * @return
+	 * @throws Exception
+	 */
 	
+	public static List<BreedTypes> getBreedDetails() throws Exception
+	{
+		List<BreedTypes> breeds = BreedDao.getBreedDetails();
+		breeds.removeAll(breeds);
+		List<BreedTypes> breed = BreedDao.getBreedDetails();
+		return breed;	
 	}
+
 }
