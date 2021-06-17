@@ -32,11 +32,11 @@ String loggedInUsername = (String) session.getAttribute("LOGGED_IN_USER");
 					if (loggedInAdminname != "Admin")
 					{
 						%> <a class="nav-link"
-						href="View.jsp">Pets</a> <%
+						href="view.jsp">Pets</a> <%
 					}
 					else
 					{
- 						%> <a class="nav-link" href="AddCart.jsp">Pets</a> <%
+ 						%> <a class="nav-link" href="addCart.jsp">Pets</a> <%
  					}
  					%>
 				</li>
@@ -66,8 +66,8 @@ String loggedInUsername = (String) session.getAttribute("LOGGED_IN_USER");
 				if (loggedInUsername == null) {
 				%>
 				<li class="nav-item active"><a class="nav-link"
-					href="AdminLogin.jsp">Admin</a></li>
-				<li class="nav-item"><a class="nav-link" href="UserLogin.jsp">User</a>
+					href="adminLogin.jsp">Admin</a></li>
+				<li class="nav-item"><a class="nav-link" href="userLogin.jsp">User</a>
 				</li>
 				<%
 				} else {

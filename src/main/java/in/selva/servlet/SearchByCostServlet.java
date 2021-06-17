@@ -22,25 +22,22 @@ public class SearchByCostServlet extends HttpServlet
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException 
     {
 		
-		try {
+    	try {
 			String cost = request.getParameter("cost");
 			int type = Integer.parseInt(cost);
 			boolean added = BreedService.searchBreedByCost(type);
-			if(added) 
-			{
-				response.sendRedirect("UserSearchDisplay.jsp");
+			if (added) {
+				response.sendRedirect("userSearchDisplay.jsp");
 			}
-			
-		}
-		catch(Exception e)
-		{
-			String errorMessage = "Unable to add Breeds ";
-			response.sendRedirect("UserSearchDisplay.jsp?errorMessage=" + errorMessage);
-		}
-		
-		
-	}
+			else {
+				response.sendRedirect("userSearchDisplay.jsp?errorMessages=No Breeds under the cost ");
 
-	
+			}
+
+		} catch (Exception e) {
+
+			response.sendRedirect("userSearchDisplay.jsp?errorMessage=No items available");
+		}
+	}
 
 }

@@ -1,9 +1,12 @@
 package in.selva.service;
 
 import java.sql.SQLException;
+import java.util.List;
 import java.util.Map;
 
 import in.selva.dao.UserDao;
+import in.selva.exception.CannotGetDetailsException;
+import in.selva.exception.DBException;
 import in.selva.model.User;
 import in.selva.validator.UserValidator;
 
@@ -27,17 +30,16 @@ public class UserService {
 	 * @param email
 	 * @param mobileNum
 	 * @param address
-	* @param password
-	 * @param confrimPassword
+	 * @param password
 	 * @return
-	 * @throws Exception 
-	 * @throws SQLException 
+	 * @throws CannotGetDetailsException
+	 * @throws ClassNotFoundException
+	 * @throws DBException
 	 */
+	
 	public boolean addDetails(String name, String email, Long mobileNum, String address, String password)
-			throws Exception {
-		
+			throws CannotGetDetailsException, ClassNotFoundException, DBException {
 		boolean registerd = false;
-		
 		User regObj = new User(name, email, mobileNum, address, password);
 		boolean nameValid = validatorObj.isNameValid(name);
 		boolean mobileValid = validatorObj.isMobileNumberValid(mobileNum);
@@ -45,8 +47,7 @@ public class UserService {
 		boolean addressValid = validatorObj.isAddressValid(address);
 		boolean passwordValid = validatorObj.isPasswordValid(password);
 		
-		if (nameValid && mobileValid && emailValid && addressValid && passwordValid)
-		{
+		if (nameValid && mobileValid && emailValid && addressValid && passwordValid) {
             	UserDao.save(regObj);
     			registerd = true;
          }
@@ -59,18 +60,20 @@ public class UserService {
      * @param uemail
      * @param userPassCode
      * @return
+     * @throws DBException 
      * @throws Exception
      */
-	public static boolean isValidUser(String uemail, String userPassCode) throws Exception {
-           boolean valid = false;	
-		   Map<String,String> loginDetails = UserDao.checkUser(uemail, userPassCode);
-
-		   for (String email : loginDetails.keySet()) {
-				String password = loginDetails.get(email);
-				if(password.matches(userPassCode) && email.matches(uemail)) {
-					valid = true;
-				}
-			}
+	
+	public static boolean isValidUser(String uemail, String userPassCode) throws CannotGetDetailsException, ClassNotFoundException, DBException {
+        boolean valid = false;	
+		   List<User> loginDetails = UserDao.checkUser();
+		   for (User user : loginDetails) {
+			   if (user.getEmail().equals(uemail) && user.getPassword().equals(userPassCode) )
+			   {
+					   valid = true;
+					   break;   
+			   }
+		}
 		   return valid;
 	}
 	
@@ -79,20 +82,21 @@ public class UserService {
 	 * @param name
 	 * @param password
 	 * @return
+	 * @throws DBException 
 	 * @throws Exception
 	 */
 	
-    public static boolean isValidAdmin(String name,String password) throws Exception{
+    public static boolean isValidAdmin(String name,String password) throws CannotGetDetailsException, ClassNotFoundException, DBException{
 		boolean valid = false;
-		Map<String,String> AdminLoginDetails = UserDao.checkAdmin(name, password);
-		for (String name1 : AdminLoginDetails.keySet())
-		{
-			String password1 = AdminLoginDetails.get(name1);
-			if(password1.matches(password) && name1.matches(name)) 
+		Map<String,String> adminLoginDetails = UserDao.checkAdmin();
+		for (String name1 : adminLoginDetails.keySet()) {
+			String password1 = adminLoginDetails.get(name1);
+			if(password1.equals(password) && name1.equals(name)) 
 			{
 				valid = true;
+				break;
 			}
 		}
-    	return valid;	
+    	return valid;
     }
 }

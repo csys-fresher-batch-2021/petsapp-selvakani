@@ -13,6 +13,7 @@ import in.selva.service.UserService;
 /**
  * Servlet implementation class RegistrationServlet
  */
+
 @WebServlet("/RegistrationServlet")
 
 public class RegistrationServlet extends HttpServlet {
@@ -32,21 +33,21 @@ public class RegistrationServlet extends HttpServlet {
 			String mobileNumber = request.getParameter("mobile");
 			long userMobileNum = Long.parseLong(mobileNumber);
 			String address = request.getParameter("address");
-			String userAge = request.getParameter("age");
 			String password = request.getParameter("pass");
 			
 			UserService service = new UserService();
-
+            
 			boolean isAdded = service.addDetails(username, email, userMobileNum, address, password);
-			if (isAdded)
+			if (isAdded) 
 			{
-				System.out.println("Successfully Registered");
-				response.sendRedirect("UserLogin.jsp");
+				response.sendRedirect("userLogin.jsp");
 			}
-		} 
-		catch (Exception e)
-		{
-			response.sendRedirect("UserRegistration.jsp?errorMessage=Invalid user details");
+			else 
+			{
+				response.sendRedirect("userRegistration.jsp?errorMessage=Invalid user details");
+			}
+		} catch (Exception e) {
+			response.sendRedirect("userRegistration.jsp?errorMessage=Invalid details");
 		}
 
 	}

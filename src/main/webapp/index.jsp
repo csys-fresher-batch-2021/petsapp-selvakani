@@ -1,11 +1,19 @@
 <html>
 <head>
-<title>Pets Paw</title>
+<title>Online Pets App</title>
+<style>
+body {
+  background-image: url('blackpuppy.jpeg');
+}
+</style>
 </head>
+
 <body>
 	<jsp:include page="header.jsp"></jsp:include>
 	<main class="container-fluid">
-		<h3>Welcome To Pets Paw</h3>
+	
+
+
 	</main>
 </body>
 </html>

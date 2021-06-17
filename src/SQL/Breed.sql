@@ -1,8 +1,9 @@
 CREATE TABLE breedList (
 
+	id serial primary key,
 	breedName varchar (30) UNIQUE NOT NULL,
 	count int NOT NULL,
-	cost bigint NOT NULL
+	cost int NOT NULL
 
 );
 

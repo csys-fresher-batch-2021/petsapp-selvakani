@@ -35,7 +35,7 @@ public class OrderBreedServlet extends HttpServlet
 		{
 			String breedType = request.getParameter("breedName");
 			int count = BreedService.getCount(breedType);
-			double cost = BreedService.getCost(breedType);
+			double cost = BreedService.getBreedCost(breedType);
 			boolean added = false;
 			boolean present = OrderService.isPresent(breedType);
 			if (!present) 
@@ -45,7 +45,7 @@ public class OrderBreedServlet extends HttpServlet
 				String role = (String) sess.getAttribute("JOB");
 				if (added && role != "SEARCHING")
 				{
-					response.sendRedirect("ViewCart.jsp");
+					response.sendRedirect("viewCart.jsp");
 				} 
 				else if (added && role == "SEARCHING")
 				{
@@ -57,7 +57,7 @@ public class OrderBreedServlet extends HttpServlet
 		catch (Exception e)
 		{
 			String errorMessage = "Unable to add";
-			response.sendRedirect("AddCart.jsp?errorMessage=" + errorMessage);
+			response.sendRedirect("addCart.jsp?errorMessage=" + errorMessage);
 		}
 
 	}

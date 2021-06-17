@@ -1,6 +1,7 @@
 package in.selva.servlet;
 
 import java.io.IOException;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -11,7 +12,6 @@ import javax.servlet.http.HttpSession;
 /**
  * Servlet implementation class LogoutServlet
  */
-
 @WebServlet("/LogoutServlet")
 
 public class LogoutServlet extends HttpServlet 
@@ -20,11 +20,14 @@ public class LogoutServlet extends HttpServlet
 
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException
-	{
+			throws ServletException, IOException {
+		
 		HttpSession session = request.getSession();
+		String userName = (String) session.getAttribute("LOGGED_IN_USER");
 		session.removeAttribute("LOGGED_IN_USER");
-		response.sendRedirect("header.jsp");
+		session.setAttribute("LOGOUT", userName);
+		response.sendRedirect("index.jsp");
+	
 	}
 
 }

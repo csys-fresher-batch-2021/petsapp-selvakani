@@ -10,7 +10,7 @@
 	<jsp:include page="header.jsp"></jsp:include>
 	<main class="container-fluid">
 		<form action="RegistrationServlet" method="post">
-		<h3>User Registration </h3>
+		<h3>User Registration</h3>
 			<table>
 				<caption>User Registration</caption>
 				<tr>
@@ -19,7 +19,7 @@
 						placeholder="Enter user name" id="userId" required autofocus></td>
 				</tr>
 				<tr>
-					<th scope="col">Email : </th>
+					<th scope="col">Email Id : </th>
 					<td><input type="email" name="email" placeholder="Enter Email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}"
 						title="Sample email:admin12@gmail.com"  id="emailId" required></td>
 				</tr>
@@ -37,13 +37,12 @@
 					<td><input type="password" name="pass" pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*_=+-]).{8,12}$"
 						title="Must contain special character,number and length=8" placeholder="Enter Password" id="passId" required></td>
 				</tr>
-			</table>
+				</table>
 			
 			<button type="submit" class="btn btn-success">Register</button>
 		
 		</form>
 		<script>
-			
 			function phonenumberValid() {
 				let mobileNumber = document.querySelector("#mobileId").value;
 				if (mobileNumber.trim().length == 10) {
