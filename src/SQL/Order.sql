@@ -1,14 +1,13 @@
-CREATE TABLE orderList (
-
-	breedName varchar (30)  NOT NULL,
-	count int NOT NULL,
-	cost bigint NOT NULL
-
-);
-CREATE TABLE confrimOrderList (
-
-	breedName varchar (30)  NOT NULL,
-	count int NOT NULL,
-	cost bigint NOT NULL
-
+create table orderList(
+	id serial primary key,
+	userid int not null,
+	username varchar(30) not null,
+	breedName varchar(20) not null,
+	count int not null,
+	cost int not null,
+	order_date DATE NOT NULL,
+	delivery_date DATE NOT NULL,
+	status varchar (30),
+	check(status in('PENDING','DELIVERED','CANCELLED'))
+	
 );

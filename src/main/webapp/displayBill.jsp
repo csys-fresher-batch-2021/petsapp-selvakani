@@ -9,22 +9,42 @@
 <html lang="en">
 <head>
 <meta charset="ISO-8859-1">
-<title>BILL</title>
+<title>Bill</title>
+<style>
+#breeds {
+  font-family: Arial, Helvetica, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+#breeds td, #breeds th {
+  border: 1px solid #ddd;
+  padding: 8px;
+}
+#breeds tr:nth-child(even){background-color: #f2f2f2;}
+#breeds tr:hover {background-color: #ddd;}
+#breeds th {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  text-align: left;
+  background-color: #04AA6D;
+  color: white;
+}
+</style>
 </head>
 <body>
 	<jsp:include page="header.jsp"></jsp:include>
 	<main class="container-fluid">
-		<form action="Login.jsp" method="post">
+		<form action="login.jsp" method="post">
 
-			<h3>Books</h3>
-			<table class="table table-bordered">
-				<caption>bill</caption>
+			<h3>Pets Paw</h3>
+			<table class="table table-bordered" id="breeds">
+				<caption>Bill</caption>
 				<thead>
 					<tr>
 						<th scope="col">S.No</th>
-						<th scope="col">Breed Name</th>
-						<th scope="col">Count</th>
-						<th scope="col">Cost</th>
+					<th scope="col">Breed Name</th>
+					<th scope="col">Count</th>
+					<th scope="col">Price/Dog</th>
 						<th scope="col">Total</th>
 
 
@@ -37,7 +57,7 @@
 					
 					<tr>
 						<td><%=i%></td>
-						<td><%=orderDetails.getBreedType()%></td>
+						<td><%=orderDetails.getBreedName()%></td>
 						<td><%=orderDetails.getCount()%></td>
 						<td><%=orderDetails.getCost()%> Rs</td>
 						<td><%=orderDetails.getCount() * orderDetails.getCost()%> Rs</td>
@@ -49,25 +69,7 @@
 			</table>
 
 		</form>
-		<%
-		String userName = (String) session.getAttribute("LOGGED_IN_USER");
-		Double total = (Double) session.getAttribute("TOTAL");
-		%>
-		<h1>YOUR TOTAL BILL</h1>
-		<table class="table table-bordered">
-			<thead>
-			</thead>
-			<tr>
-				<th scope="col">User Name </th>
-				<th scope="col">Total Amount(Rs) </th>
-			</tr>
-			<tr>
-				<td><%=userName%>
-				<td><%=total%>
-			</tr>
-		</table>
-
-		<a href="AddCart.jsp" class="btn btn-success">Confirm Order</a>
+		
 	</main>
 </body>
 </html>

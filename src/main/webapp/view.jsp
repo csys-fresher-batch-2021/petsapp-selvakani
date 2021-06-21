@@ -38,47 +38,39 @@
 </style>
 </head>
 <body>
-	<jsp:include page="header.jsp"></jsp:include>
+<jsp:include page="header.jsp"></jsp:include>
 	<main class="container-fluid">
-		
-
-			<h3 id="heading">Delete</h3>
-			<table class="table table-bordered" id="books">
-				<caption></caption>
-				<thead>
-					<tr>
-						<th scope="col">S.No</th>
+      <h3 id="heading">Pets Paw</h3>
+		<table class="table table-bordered" id="breeds">
+			<caption></caption>
+			<thead>
+				<tr>
+					<th scope="col">S.No</th>
 					<th scope="col">Breed Name</th>
 					<th scope="col">Count</th>
 					<th scope="col">Price/Dog(Rs.)</th>
-					<th scope="col">Delete</th>
-
-						<%
-					    List<BreedTypes> breeds = BreedService.getBreedDetails();
-						int i = 0;
-						for (BreedTypes breedDetails : breeds) {
-							i++;
-						%>
 					
-					<tr>
-						<td><%=i%></td>
-						<td><%=breedDetails.getBreedName()%></td>
-						<td><%=breedDetails.getCount()%></td>
-						<td><%=breedDetails.getCost()%> Rs</td>
-						<td><a
-							href="DeleteBreedServlet?breedName=<%=breedDetails.getBreedName()%>"
-							class="btn btn-danger">Delete</a></td>
-					</tr>
 					<%
-					}
+					
+					List<BreedTypes> breeds = BreedDao.getBreedDetails();
+					int i = 0;
+					for (BreedTypes breedDetails : breeds) {
+						i++;
 					%>
-				</thead>
-			</table>
-
-			<a href="addBreedTypes.jsp" class="btn btn-primary">Back</a>
-	
-
+				
+				<tr>
+					<td><%=i%></td>
+					<td><%=breedDetails.getBreedName() %></td>
+					<td><%=breedDetails.getCount() %></td>
+					<td><%=breedDetails.getCost() %> Rs.</td>
+					
+				</tr>
+				<%
+				}
+				%>
+			</thead>
+		</table>
 		
-	</main>
+    </main>
 </body>
 </html>

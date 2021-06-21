@@ -20,28 +20,26 @@ import in.selva.service.OrderService;
 public class DeleteCartServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
     @Override
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException 
-    {
-		try {
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    	try {
 			boolean delete = false;
 			
 			String name = request.getParameter("breedName");
-		    delete = OrderService.deleteCart(name);
-			int totalCount = OrderService.getUpdatedBreed(name);
-			System.out.println("Total count : "+totalCount);
-			System.out.println("Total from order list : "+totalCount);
+			delete = OrderService.deleteCart(name);
+			int totalCount = OrderService.getUpdatedBreeds(name);
+			
 			int count = OrderDao.getCount(name);
-			System.out.println("order count"+count);
+			
+		
 		    boolean updated =  OrderDao.updateBreeds(name, totalCount+count);
-		    if(delete && updated)
-		    {
-		    	response.sendRedirect("DisplayOrder.jsp");
+		    if(delete && updated) {
+		    	response.sendRedirect("displayOrder.jsp");
 		    }
-		}
-		catch(Exception e)
-		{
-			response.sendRedirect("ViewCart.jsp?errorMessage=Unable to delete breed Name");
-		}
+			
+			
+		}catch(Exception e) {
+			response.sendRedirect("viewCart.jsp?errorMessage=Unable to delete item");
+		} 
 	}
 
 }

@@ -3,86 +3,87 @@ package in.selva.service;
 import java.util.List;
 
 import in.selva.dao.BreedDao;
+import in.selva.exception.CannotGetDetailsException;
+import in.selva.exception.DBException;
+import in.selva.exception.NotAbleToDeleteException;
 import in.selva.model.BreedTypes;
+import in.selva.validator.BreedValidator;
 
-public class BreedService 
-{
+public class BreedService {
 
-	private BreedService() 
-	{
+	
+	private BreedService() {
 
 	}
 
-	private static BreedDao breedDao = new BreedDao();
-
+	
 	/**
-	 * Add Breed Details
+	 * Add Breed Details.
 	 * 
-	 * @param breedType
+	 * @param breedName
 	 * @param count
 	 * @param cost
 	 * @return
+	 * @throws CannotGetDetailsException
+	 * @throws ClassNotFoundException
+	 * @throws DBException
 	 */
 	
-	public static boolean addBreed(String breedType, int count, double cost)
-	{
+	public static boolean addBreed(String breedName, int count, double cost) throws CannotGetDetailsException, ClassNotFoundException, DBException  {
 		boolean isAdded = false;
-		boolean present = BreedService.isPresent(breedType);
-
-		if (!present) 
+		boolean present = BreedService.isPresent(breedName);
+		boolean isValidName = BreedValidator.isBreedNameValid(breedName);
+		boolean validCount = BreedValidator.isValidNumber(count);
+		boolean validCost = BreedValidator.isCostValid(cost);
+        BreedTypes breedObj = new BreedTypes(breedName, count, cost);
+		if (isValidName && validCount && validCost && !present) 
 		{
 			isAdded = true;
-			breedDao.addBreed(breedType, count, cost);
+			BreedDao.saveBreed(breedObj);
 		}
 
 		return isAdded;
 	}
 
 	/**
-	 * Delete Breed Type from breed details.
+	 * Delete Breed from arraylist.
 	 * 
-	 * @param breedType
+	 * @param breedName
 	 * @return
+	 * @throws CannotGetDetailsException
+	 * @throws ClassNotFoundException
+	 * @throws NotAbleToDeleteException
+	 * @throws DBException
 	 */
 	
-	public static boolean deleteBreed(String breedType) 
-	{
-		boolean isDeleted = false;
-		BreedTypes searchbreed = null;
-		List<BreedTypes> breeds = BreedDao.getBreed();
-		for (BreedTypes breed : breeds) 
-		{
-			if (breed.getBreedType().equalsIgnoreCase(breedType))
-			{
-				searchbreed = breed;
-				break;
-			}
+	public static boolean deleteBreed(String breedName) throws CannotGetDetailsException, ClassNotFoundException, NotAbleToDeleteException, DBException {
+		
+		boolean deleted = false;
+		if(BreedValidator.isBreedNameValid(breedName)) {
+			deleted =  BreedDao.deleteBreeds(breedName.trim());
 		}
-
-		if (searchbreed != null) 
-		{
-			breeds.remove(searchbreed);
-			isDeleted = true;
-			System.out.println("Deleted");
-		}
-		return isDeleted;
+		return deleted;
+		
 	}
 
+	
 	/**
-	 *  Find the breed present in the list or not.
-	 *  
-	 * @param breedType
+	 * Find the breed present in the list or not.
+	 * 
+	 * @param breedName
 	 * @return
+	 * @throws CannotGetDetailsException
+	 * @throws ClassNotFoundException
+	 * @throws DBException
 	 */
 	
-	public static boolean isPresent(String breedType) 
-	{
+	public static boolean isPresent(String breedName) throws CannotGetDetailsException, ClassNotFoundException, DBException {
 		boolean present = false;
-		List<BreedTypes> breeds = BreedDao.getBreed();
-		for (BreedTypes breedDetail : breeds) {
-			if (breedDetail.getBreedType().equalsIgnoreCase(breedType)) 
-			{
+		List<BreedTypes> breeds = BreedDao.getBreedDetails();
+		for (BreedTypes breedDetails : breeds) {
+			if (breedDetails.getBreedName().equalsIgnoreCase(breedName)) {
 				present = true;
+				break;
 			}
 
 		}
@@ -91,20 +92,20 @@ public class BreedService
 	}
 
 	/**
-	 * Get Breed Count using breed name.
+	 * Get breed count using breed name.
 	 * 
-	 * @param breedType
+	 * @param breedName
 	 * @return
+	 * @throws CannotGetDetailsException
+	 * @throws ClassNotFoundException
+	 * @throws DBException
 	 */
 	
-	public static int getCount(String breedType)
-	{
+	public static int getCount(String breedName) throws CannotGetDetailsException, ClassNotFoundException, DBException {
 		int count = 0;
-		List<BreedTypes> breeds = BreedDao.getBreed();
-		for (BreedTypes breedDetails : breeds) 
-		{
-			if (breedDetails.getBreedType().equalsIgnoreCase(breedType)) 
-			{
+		List<BreedTypes> breeds = BreedDao.getBreedDetails();
+		for (BreedTypes breedDetails : breeds) {
+			if (breedDetails.getBreedName().equalsIgnoreCase(breedName)) {
 				count = breedDetails.getCount();
 			}
 
@@ -116,18 +117,18 @@ public class BreedService
 	/**
 	 * Get cost using breed name.
 	 * 
-	 * @param breedType
+	 * @param breedName
 	 * @return
+	 * @throws CannotGetDetailsException
+	 * @throws ClassNotFoundException
+	 * @throws DBException
 	 */
 	
-	public static double getCost(String breedType) 
-	{
+	public static double getBreedCost(String breedName) throws CannotGetDetailsException, ClassNotFoundException, DBException {
 		double cost = 0;
-		List<BreedTypes> breeds = BreedDao.getBreed();
-		for (BreedTypes breedDetails : breeds)
-		{
-			if (breedDetails.getBreedType().equalsIgnoreCase(breedType))
-			{
+		List<BreedTypes> breeds = BreedDao.getBreedDetails();
+		for (BreedTypes breedDetails : breeds) {
+			if (breedDetails.getBreedName().equalsIgnoreCase(breedName)) {
 				cost = breedDetails.getCost();
 			}
 
@@ -135,33 +136,30 @@ public class BreedService
 		return cost;
 
 	}
-	
+
 	/**
-	 * Add search breed details.
+	 * Add search breed details using cost.
 	 * 
-	 * @param breedType
+	 * @param type
 	 * @return
 	 */
 	
-	public static boolean searchBreedByCost(int breedType)
-	{
+	public static boolean searchBreedByCost(int type) {
 		boolean isAdd = false;
 		List<BreedTypes> costDetails = BreedDao.getSearch();
-		costDetails.removeAll(costDetails);
-		if (breedType == 1) 
+		if (type == 1) 
 		{
-			for (BreedTypes breed : BreedDao.getBreed()) 
-			{
-				if (breed.getCost() <= 10000) {
+			for (BreedTypes breed : BreedDao.getBreed()) {
+				if (breed.getCost() <= 10000)
+				{
 					costDetails.add(breed);
 					isAdd = true;
 				}
 			}
 		} 
-		
-		else if (breedType == 2) 
-		{
-			for (BreedTypes breed : BreedDao.getBreed()) {
+		else if (type == 2) {
+			for (BreedTypes breed : BreedDao.getBreed())
+			{
 				if (breed.getCost() <= 15000) 
 				{
 					costDetails.add(breed);
@@ -169,10 +167,9 @@ public class BreedService
 				}
 			}
 		}
-		
-		else if (breedType == 3) 
-		{
-			for (BreedTypes breed : BreedDao.getBreed()) {
+		else if (type == 3) {
+			for (BreedTypes breed : BreedDao.getBreed())
+			{
 				if (breed.getCost() <= 25000) 
 				{
 					costDetails.add(breed);
@@ -180,10 +177,9 @@ public class BreedService
 				}
 			}
 		}
-		
-		else if (breedType == 4) 
-		{
-			for (BreedTypes breed : BreedDao.getBreed()) {
+		else if (type == 4) {
+			for (BreedTypes breed : BreedDao.getBreed())
+			{
 				if (breed.getCost() >= 25000) 
 				{
 					costDetails.add(breed);
@@ -191,26 +187,26 @@ public class BreedService
 				}
 			}
 		}
-
+		
 		return isAdd;
 	}
 
+
 	/**
-	 * Add confirm ordered details.
+	 * Add confirm Ordered breed details.
 	 * 
-	 * @param breedType
+	 * @param breedName
 	 * @return
 	 */
 	
-	public static boolean confirmOrder(String breedType) 
+	public static boolean confirmOrder(String breedName)
 	{
 		boolean isAdd = false;
 		List<BreedTypes> costDetails = BreedDao.getSearch();
-		costDetails.removeAll(costDetails);
+		costDetails.clear();
 		for (BreedTypes breed : BreedDao.getBreed()) 
 		{
-			if (breed.getBreedType().equalsIgnoreCase(breedType)) 
-			{
+			if (breed.getBreedName().equalsIgnoreCase(breedName)) {
 				costDetails.add(breed);
 				isAdd = true;
 			}
@@ -218,18 +214,14 @@ public class BreedService
 		return isAdd;
 	}
 
-	/**
-	 * Get breed details from database.
-	 * @return
-	 * @throws Exception
-	 */
+    /**
+     * Get the breed details.
+     * @return
+     */
 	
-	public static List<BreedTypes> getBreedDetails() throws Exception
+	public static List<BreedTypes> getBreedDetails() 
 	{
-		List<BreedTypes> breeds = BreedDao.getBreedDetails();
-		breeds.removeAll(breeds);
-		List<BreedTypes> breed = BreedDao.getBreedDetails();
-		return breed;	
+		return BreedDao.getBreed();
 	}
 
 }

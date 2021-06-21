@@ -1,43 +1,41 @@
 package in.selva.model;
 
-/**
- * @author selv2619
- *
- */
-public class BreedTypes 
-{
+public class BreedTypes {
 
-	public String breedType;
-	public int count;
-	public double price;
-	
-	public BreedTypes(String breedType, int count, double price) 
+	/**
+	 * Declaring variables required for Pet shop.
+	 */
+     
+	private String breedName;
+	private int count;
+	private double cost;
+
+	public String getBreedName()
 	{
-		
-		this.breedType = breedType;
-		this.count=count;
-		this.price= price;
+		return breedName;
 	}
-	
-	public String getBreedType() 
-	{
-		return breedType;
-	}
-	
-	public int getCount() 
+
+	public int getCount()
 	{
 		return count;
 	}
-	
+
 	public double getCost() 
 	{
-		return price;
+		return cost;
 	}
-	
+
+	public BreedTypes(String breedName, int count, double cost) {
+		super();
+		this.breedName = breedName;
+		this.count = count;
+		this.cost = cost;
+	}
+
 	@Override
-	public String toString() 
-	{
-		return "BreedType [ BreedType : " + breedType + "Count : "+count+ ", Price : "+ price + "]";
+	public String toString() {
+		return "BreedType [BreedName : " + breedName +", Count : " + count + ", Cost : " + cost
+				+ "]";
 	}
-	
+
 }

@@ -27,9 +27,9 @@
 				</tr>
 			</table>
 
-			<button type="submit" class="btn btn-success">Submit</button>
+			<button type="submit" class="btn btn-success">Login</button>
 
-			<a href="UserRegistration.jsp" class="btn btn-primary">New User</a>
+			<a href="userRegistration.jsp" class="btn btn-primary">New User</a>
 		</form>
 		
 	</main>

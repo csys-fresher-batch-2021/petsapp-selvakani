@@ -1,12 +1,16 @@
 package in.selva.service;
 
+import java.time.LocalDate;
 import java.util.List;
 
 import in.selva.dao.OrderDao;
+import in.selva.dao.UserDao;
+import in.selva.exception.CannotGetDetailsException;
+import in.selva.exception.DBException;
+import in.selva.exception.NotAbleToDeleteException;
 import in.selva.model.Order;
 
-public class OrderService
-{
+public class OrderService {
 
 	private OrderService() {
 
@@ -23,16 +27,14 @@ public class OrderService
 	 * @return
 	 */
 	
-	public static boolean addOrder(String breedName, int count, double cost) 
-	{
+	public static boolean addOrder(String breedName, int count, double cost) {
 		boolean isAdded = false;
-		boolean present = OrderService.isPresent(breedName);
 		List<Order> breed = OrderDao.getOrder();
-		breed.removeAll(breed);
-		if (!present || present) {
-			isAdded = true;
-			orderDao.addCart(breedName, count, cost);
-		}
+		breed.clear();
+		orderDao.addCart(breedName, count, cost);
+		isAdded = true;
+
+		
 
 		return isAdded;
 	}
@@ -44,14 +46,11 @@ public class OrderService
 	 * @return
 	 */
 	
-	public static boolean isPresent(String breedName) 
-	{
+	public static boolean isPresent(String breedName) {
 		boolean present = false;
 		List<Order> orders = OrderDao.getOrder();
-		for (Order orderDetails : orders) 
-		{
-			if (orderDetails.getBreedType().equalsIgnoreCase(breedName))
-			{
+		for (Order orderDetails : orders) {
+			if (orderDetails.getBreedName().equalsIgnoreCase(breedName)) {
 				present = true;
 			}
 
@@ -61,81 +60,96 @@ public class OrderService
 	}
 
 	/**
-	 * Delete Breed from the list
+	 * Delete Breed from the list.
 	 * 
 	 * @param breedName
 	 * @return
 	 */
 	
-	public static boolean deleteBreed(String breedName) 
-	{
+	public static boolean deleteBreed(String breedName) {
 		boolean isDeleted = false;
 		Order searchbreed = null;
 		List<Order> breeds = OrderDao.getOrder();
-		for (Order order : breeds) 
-		{
-			if (order.getBreedType().equalsIgnoreCase(breedName)) 
-			{
+		for (Order order : breeds) {
+			if (order.getBreedName().equalsIgnoreCase(breedName)) {
 				searchbreed = order;
 				break;
 			}
 		}
 
-		if (searchbreed != null)
-		{
+		if (searchbreed != null) {
 			breeds.remove(searchbreed);
 			isDeleted = true;
+
 		}
 		return isDeleted;
 	}
 
 	/**
-	 * Check breed count valid.
+	 *  Check breed count valid or not.
 	 *  
 	 * @param breedName
 	 * @param count
 	 * @return
 	 */
 	
-	public static boolean checkValidNoOfBooks(String breedName, int count) {
+	public static boolean checkValidCount(String breedName, int count) {
 		boolean present = OrderService.isPresent(breedName);
-		boolean validBreed = false;
-		if (present) 
-		{
+		boolean validCount = false;
+		if (present) {
 			List<Order> breeds = OrderDao.getOrder();
 			for (Order order : breeds) {
 				if (order.getCount() >= count) {
-					validBreed = true;
+					validCount = true;
 
 				}
 			}
 		}
-		return validBreed;
+		return validCount;
 	}
 
 	/**
-	 * Add Breed
+	 * Add ordered details
 	 * 
+	 * @param userName
 	 * @param breedName
 	 * @param count
 	 * @return
-	 * @throws Exception
+	 * @throws CannotGetDetailsException
+	 * @throws ClassNotFoundException
+	 * @throws DBException
 	 */
 	
-	public static boolean addConfirmOrder(String breedName, int count) throws Exception 
-	{
+	public static boolean addConfirmOrder(String userName,String breedName, int count) throws CannotGetDetailsException, ClassNotFoundException, DBException  {
 		boolean isAdd = false;
 		boolean present = OrderService.isPresent(breedName);
-		for (Order order : OrderDao.getOrder()) 
-		{
-			if (present) 
-			{
+		
+		int user = UserDao.getId(userName);
+		
+		
+		
+		for (Order order : OrderDao.getOrder()) {
+			if (present) {
+				
+				int id = order.getId();
+				
 				double cost = order.getCost();
-				Order orderObj = new Order(breedName, count, cost);
+				String status = order.getStatus();
+				
+				LocalDate orderDate = LocalDate.now();
+				
+				LocalDate deliveryDate = orderDate.plusDays(6);
+				Order orderObj = new Order(id,user,userName,breedName, count, cost,orderDate,deliveryDate,status);
+				
 				OrderDao.saveOrder(orderObj);
+				
+
+				OrderDao.addConfirmCart(breedName, count, cost);
+				 
 				isAdd = true;
-				break;
+
 			}
+
 		}
 		return isAdd;
 	}
@@ -148,140 +162,130 @@ public class OrderService
 	 * @return
 	 */
 	
-	public static boolean validCount(String breedName, int count) 
-	{
+	public static boolean validCount(String breedName, int count) {
 		boolean valid = false;
 		boolean present = OrderService.isPresent(breedName);
-		if (present)
-		{
+		if (present) {
 			List<Order> breeds = OrderDao.getOrder();
-			for (Order order : breeds) 
-			{
-				if (order.getCount() >= count)
-				{
+			for (Order order : breeds) {
+				if (order.getCount() >= count) {
+
 					valid = true;
 					break;
+
 				}
 			}
+
 		}
 		return valid;
 	}
 
 	/**
-	 * Delete breed from cart.
-	 * 
+	 * Delete ordered breed from cart.
 	 * @param breedName
 	 * @return
-	 * @throws Exception
+	 * @throws CannotGetDetailsException
+	 * @throws ClassNotFoundException
+	 * @throws NotAbleToDeleteException
+	 * @throws DBException
 	 */
 	
-	public static boolean deleteCart(String breedName) throws Exception 
-	{
+	public static boolean deleteCart(String breedName) throws CannotGetDetailsException, ClassNotFoundException, NotAbleToDeleteException, DBException {
+
 		return OrderDao.deleteOrders(breedName.trim());
 	}
 
 	/**
-	 * Calculate bill for cart.
+	 * Calculate bill for items in cart.
 	 * 
 	 * @return
-	 * @throws Exception
 	 */
 	
-	public static double billCalculation() throws Exception 
-	{
+	public static double billCalculation()  {
 		double total = 0;
-		List<Order> breeds = OrderService.getOrderDetails();
-		for (Order breed : breeds) 
-		{
+		
+		List<Order> breeds = OrderDao.getConfirmOrder();
+		
+		for (Order breed : breeds) {
 			total = total + breed.getCount() * breed.getCost();
 		}
-
+	
+		
+        breeds.clear();
+        
 		return total;
 	}
 
 	/**
-	 * Check whether the ordered breed is present in particular arraylist.
+	 * Check whether the ordered book is present in particular arraylist.
 	 * 
 	 * @param breedName
 	 * @return
-	 * @throws Exception
+	 * @throws CannotGetDetailsException
+	 * @throws ClassNotFoundException
+	 * @throws DBException
 	 */
 	
-	public static boolean isPresentOrder(String breedName) throws Exception 
-	{
+	public static boolean isPresentOrder(String breedName) throws CannotGetDetailsException, ClassNotFoundException, DBException {
 		boolean present = false;
 		List<Order> orders = OrderService.getOrderDetails();
-		for (Order orderDetails : orders) 
-		{
-			if (orderDetails.getBreedType().equalsIgnoreCase(breedName))
-			{
+		for (Order orderDetails : orders) {
+			if (orderDetails.getBreedName().equalsIgnoreCase(breedName)) {
 				present = true;
 			}
+
 		}
 		return present;
+
 	}
 
 	/**
 	 * Get order details.
 	 * 
 	 * @return
+	 * @throws CannotGetDetailsException 
+	 * @throws ClassNotFoundException 
+	 * @throws DBException 
 	 * @throws Exception
 	 */
 	
-	public static List<Order> getOrderDetails() throws Exception 
-	{
+	public static List<Order> getOrderDetails() throws ClassNotFoundException, CannotGetDetailsException, DBException  {
 		List<Order> orders = OrderDao.getOrderDetails();
-		orders.removeAll(orders);
+		orders.clear();
 		List<Order> order = OrderDao.getOrderDetails();
 		return order;
 
 	}
 
-	/**
-	 * Delete Breed Type from Order List.
-	 * 
-	 * @param breedName
-	 * @return
-	 */
+    /**
+     * Get breed count for update.
+     * 
+     * @param breedName
+     * @return
+     */
 	
-	public static boolean deleteBreedOrder(String breedName)
-	{
-		boolean isDeleted = false;
-		Order searchbreed = null;
-		List<Order> breeds = OrderDao.getOrder();
-		for (Order order : breeds) 
-		{
-			if (order.getBreedType().equalsIgnoreCase(breedName)) {
-				searchbreed = order;
-				break;
-			}
-		}
-
-		if (searchbreed != null)
-		{
-			breeds.remove(searchbreed);
-			isDeleted = true;
-		}
-		return isDeleted;
-	}
-
-	/**
-	 *  Get breed count for update.
-	 *  
-	 * @param breedName
-	 * @return
-	 */
-	
-	public static int getUpdatedBreed(String breedName) {
+	public static int getUpdatedBreeds(String breedName) {
 		int count1 = 0;
 		List<Order> orders = OrderDao.getOrder();
-		for (Order orderDetails : orders) 
-		{
-			if (orderDetails.getBreedType().equalsIgnoreCase(breedName))
-			{
+		for (Order orderDetails : orders) {
+			if (orderDetails.getBreedName().equalsIgnoreCase(breedName)) {
 				count1 = orderDetails.getCount();
+
 			}
+
 		}
 		return count1;
 	}
+	
+     
+     public static boolean updateRejectStatus(int orderId) throws ClassNotFoundException, CannotGetDetailsException, DBException  {
+		
+		return OrderDao.updateRejectStatus(orderId);
+	}
+	
+	public static boolean updateStatus(int orderId) throws ClassNotFoundException, CannotGetDetailsException, DBException  {
+		
+		return OrderDao.updateStatus(orderId);
+	}
+
 }

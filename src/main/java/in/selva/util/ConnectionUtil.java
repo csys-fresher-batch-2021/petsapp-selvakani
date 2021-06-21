@@ -5,10 +5,10 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-public class ConnectionUtil 
-{
-	private ConnectionUtil()
-	{
+
+import in.selva.exception.DBException;
+public class ConnectionUtil {
+	private ConnectionUtil() {
 		//Default constructor
 	}
 	private static String driverClass = System.getenv("spring.datasource.driver-class-name");
@@ -21,59 +21,48 @@ public class ConnectionUtil
 	 * @throws ClassNotFoundException
 	 * @throws SQLException
 	 */
-	public static Connection getConnection() throws ClassNotFoundException, SQLException 
-	{
+	public static Connection getConnection() throws ClassNotFoundException, SQLException {
 		Class.forName(driverClass);
 		return DriverManager.getConnection(url, username, password);
+	
 	}
 	/**
 	 * This method is used to close the connection of Resultset connection and prepared statement
 	 * Method overloading
 	 * @param con
+	 * @throws DBException 
 	 */
-	public static void close( ResultSet rs, Statement statement, Connection con) {
-		try 
-		{
-			if(rs!=null)
-			{
+	public static void close( ResultSet rs, Statement statement, Connection con) throws DBException {
+		try {
+			if(rs!=null) {
 				rs.close();
 			}
-			if(statement!= null) 
-			{
+			if(statement!= null) {
 				statement.close();
 			}
-			if (con != null)
-			{
+			if (con != null) {
 				con.close();
 			}
-		} 
-		catch (SQLException e) 
-		{
-			e.printStackTrace();
+		} catch (SQLException e) {
+			throw new DBException("unable to connect");
 		}
 	}
-	
 	/**
 	 * This method closes the connections for statement and connection.
 	 * @param statement
 	 * @param con
+	 * @throws DBException 
 	 */
-	
-	public static void close(Statement statement, Connection con) {
-		try
-		{
-			if (statement != null) 
-			{
+	public static void close(Statement statement, Connection con) throws DBException {
+		try {
+			if (statement != null) {
 				statement.close();
 			}
-			if (con != null) 
-			{
+			if (con != null) {
 				con.close();
 			}
-		} 
-		catch (SQLException e) 
-		{
-			e.printStackTrace();
+		} catch (SQLException e) {
+			throw new DBException("unable to close connection");
 		}
 	}
 }

@@ -13,9 +13,8 @@ import in.selva.dao.OrderDao;
 import in.selva.service.OrderService;
 
 /**
- * Servlet implementation class ConfirmOrderServlet
+ * Servlet implementation class CofirmOrderServlet
  */
-
 @WebServlet("/ConfirmOrderServlet")
 
 public class ConfirmOrderServlet extends HttpServlet {
@@ -30,21 +29,27 @@ public class ConfirmOrderServlet extends HttpServlet {
 			HttpSession session = request.getSession();
 			String breedName = (String) session.getAttribute("breedName");
 			boolean valid = OrderService.validCount(breedName, count);
-			int totalCount = OrderService.getUpdatedBreed(breedName);
-			System.out.println("Total from order list : " + totalCount);
-
+			
+			int totalCount = OrderService.getUpdatedBreeds(breedName);
+			
+            
 			boolean updated = OrderDao.updateBreeds(breedName, totalCount - count);
-			if (valid && updated) {
-				boolean added = OrderService.addConfirmOrder(breedName, count);
+			
+			if (valid && updated) 
+			{
+				HttpSession sess = request.getSession();
+				String userName = (String) sess.getAttribute("LOGGED_IN_USER");
+				boolean added = OrderService.addConfirmOrder(userName,breedName, count);
+				
 				if (added) {
-					response.sendRedirect("DisplayOrder.jsp");
+					response.sendRedirect("displayOrder.jsp");
 				} else {
-					response.sendRedirect("ViewCart.jsp?errorMessage=Unable to add");
+					response.sendRedirect("viewCart.jsp?errorMessage=Unable to add");
 				}
 			}
 		} catch (Exception e) {
-			response.sendRedirect("ViewCart.jsp?errorMessage=Invalid No Of Books");
-		}
+			response.sendRedirect("viewCart.jsp?errorMessage=Invalid Count");
+		} 
 
 	}
 

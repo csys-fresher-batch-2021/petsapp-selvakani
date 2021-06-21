@@ -13,7 +13,9 @@ import in.selva.service.UserService;
 /**
  * Servlet implementation class UserLoginServlet.
  */
+
 @WebServlet("/UserLoginServlet")
+
 public class UserLoginServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
@@ -29,17 +31,21 @@ public class UserLoginServlet extends HttpServlet {
 			String userPassCode = request.getParameter("passCode");
 
 			boolean isValidUser = UserService.isValidUser(uemail, userPassCode);
-
+          
 			String uname = UserDao.getValidUser(uemail);
+			
 
 			if (isValidUser) {
 				HttpSession session = request.getSession();
 				session.setAttribute("LOGGED_IN_USER", uname);
 				session.setAttribute("ROLE", "USER");
-				response.sendRedirect("AddCart.jsp");
+				response.sendRedirect("addCart.jsp");
+			}
+			else {
+				response.sendRedirect("userLogin.jsp?errorMessage=Invalid Login Credentials");
 			}
 		} catch (Exception e) {
-			response.sendRedirect("UserLogin.jsp?errorMessage=Invalid Login Credentials");
+			response.sendRedirect("userLogin.jsp?errorMessage=Invalid Login Info");
 		}
 	}
 }
