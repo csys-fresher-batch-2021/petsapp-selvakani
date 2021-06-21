@@ -17,7 +17,7 @@
   border-collapse: collapse;
   width: 100%;
 }
-#breeds td, #books th {
+#breeds td, #breeds th {
   border: 1px solid #ddd;
   padding: 8px;
 }
@@ -49,7 +49,7 @@
 				   
 					if(role =="ADMIN" || user == null) {
 					%>
-				    <th scope="col">S.N0</th>
+				    <th scope="col">S.No</th>
 					<th scope="col">Breed Name</th>
 					<th scope="col">Count</th>
 					<th scope="col">Price/Dog</th>
