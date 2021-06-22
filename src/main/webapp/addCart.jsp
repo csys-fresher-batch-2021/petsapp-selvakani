@@ -42,7 +42,7 @@
 	<main class="container-fluid">
 		<form method="post">
 
-			<h3 id="heading">Book Now</h3>
+			<h3 id="heading">Book Yours Now</h3>
 			<table class="table table-bordered" id="breeds">
 				<caption></caption>
 				<thead>

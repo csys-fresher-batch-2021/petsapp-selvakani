@@ -147,6 +147,7 @@ public class BreedService {
 	public static boolean searchBreedByCost(int type) {
 		boolean isAdd = false;
 		List<BreedTypes> costDetails = BreedDao.getSearch();
+		costDetails.clear();
 		if (type == 1) 
 		{
 			for (BreedTypes breed : BreedDao.getBreed()) {

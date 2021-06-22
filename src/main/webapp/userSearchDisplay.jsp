@@ -52,7 +52,7 @@
 				    <th scope="col">S.No</th>
 					<th scope="col">Breed Name</th>
 					<th scope="col">Count</th>
-					<th scope="col">Price/Dog</th>
+					<th scope="col">Price/Dog(Rs.)</th>
 					
 					<%
 					BreedDao breedDao = new BreedDao();
@@ -111,8 +111,8 @@
 				<a href="viewCart.jsp" class="btn btn-success">View Cart</a>
 						<%
 					    }
-						%>    
-	</form>
-</main>
+						%>      
+</form>
+	</main>
 </body>
 </html>
