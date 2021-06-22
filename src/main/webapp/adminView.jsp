@@ -70,7 +70,7 @@
 				%>
 			</thead>
 		</table>
-		
+		<a href="addBreedTypes.jsp">Add More</a>
     </main>
    
 </body>

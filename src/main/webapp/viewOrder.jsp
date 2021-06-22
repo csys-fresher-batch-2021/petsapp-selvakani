@@ -100,7 +100,7 @@
 			%>
 		</thead>
 		</table>
-	<a href="addBreedDetails.jsp" class="btn btn-primary">Back</a>
+	<a href="addBreedTypes.jsp" class="btn btn-primary">Back</a>
 	
 	</main>
 

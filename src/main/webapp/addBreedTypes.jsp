@@ -40,7 +40,7 @@
 			</table>
 			<button type="submit" class="btn btn-success">Add Breed</button>
 		</form>
-		<br /> <a href="view.jsp" class="btn btn-primary">View</a> <a
+		<br /> <a href="adminView.jsp" class="btn btn-primary">View</a> <a
 			href="displayBreedTypes.jsp" class="btn btn-danger">Delete</a>
 			<a href="viewOrder.jsp" class="btn btn-success">View Order</a>
 			<script>

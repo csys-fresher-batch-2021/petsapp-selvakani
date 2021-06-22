@@ -12,7 +12,7 @@
 		<form action="LoginServlet" method="post">
 		<h3>Admin Login</h3>
 			<table>
-				<caption>Admin Portal</caption>
+				<caption>Admin Name : AdminSK <br>Password : AdminSK@25</caption>
 				<tr>
 					<th scope="col">Admin Name : </th>
 					<td><input type="text" name="userName" pattern="[A-Za-z\s]{3,}" title="Name must have 3 Character"
