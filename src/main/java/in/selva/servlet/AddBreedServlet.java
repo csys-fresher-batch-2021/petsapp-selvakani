@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import in.selva.service.BreedService;
 
 /**
- * Servlet implementation class AddBooksServlet
+ * Servlet implementation class AddBreedsServlet
  */
 @WebServlet("/AddBreedServlet")
 
