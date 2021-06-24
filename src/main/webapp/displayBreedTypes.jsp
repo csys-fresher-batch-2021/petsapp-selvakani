@@ -42,7 +42,7 @@
 	<main class="container-fluid">
 		
 
-			<h3 id="heading">Delete</h3>
+			<h3 id="heading">Delete </h3>
 			<table class="table table-bordered" id="books">
 				<caption></caption>
 				<thead>

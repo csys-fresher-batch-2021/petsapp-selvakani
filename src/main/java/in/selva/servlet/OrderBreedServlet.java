@@ -31,33 +31,27 @@ public class OrderBreedServlet extends HttpServlet
 			throws ServletException, IOException 
 	{
 
-		try 
-		{
-			String breedType = request.getParameter("breedName");
-			int count = BreedService.getCount(breedType);
-			double cost = BreedService.getBreedCost(breedType);
-			boolean added = false;
-			boolean present = OrderService.isPresent(breedType);
-			if (!present) 
-			{
-				added = OrderService.addOrder(breedType, count, cost);
-				HttpSession sess = request.getSession();
-				String role = (String) sess.getAttribute("JOB");
-				if (added && role != "SEARCHING")
+		try {
+			String breedName = request.getParameter("breedName");
+
+			int count = BreedService.getCount(breedName);
+			double cost = BreedService.getBreedCost(breedName);
+			boolean isAdded = false;
+			
+			
+				isAdded = OrderService.addOrder(breedName, count, cost);
+				if (isAdded) 
 				{
 					response.sendRedirect("viewCart.jsp");
-				} 
-				else if (added && role == "SEARCHING")
+				}
+				else
 				{
-					response.sendRedirect("userSearchDisplay.jsp");
+					response.sendRedirect("viewCart.jsp?Invalid Count");
 				}
 
-			}
-		} 
-		catch (Exception e)
-		{
-			String errorMessage = "Unable to add";
-			response.sendRedirect("addCart.jsp?errorMessage=" + errorMessage);
+			
+		} catch (Exception e) {
+			response.sendRedirect("addCart.jsp?errorMessage=Unable to add");
 		}
 
 	}

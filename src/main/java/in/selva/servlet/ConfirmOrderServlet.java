@@ -43,8 +43,10 @@ public class ConfirmOrderServlet extends HttpServlet {
 				
 				if (added) {
 					response.sendRedirect("displayOrder.jsp");
-				} else {
-					response.sendRedirect("viewCart.jsp?errorMessage=Unable to add");
+				}
+				else
+				{
+					response.sendRedirect("viewCart.jsp?errorMessage=Invalid Count...Check Count");
 				}
 			}
 		} catch (Exception e) {

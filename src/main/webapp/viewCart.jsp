@@ -35,7 +35,7 @@
 <body>
 <jsp:include page="header.jsp"></jsp:include>
 	<main class="container-fluid">
-      <h3>Books</h3>
+      <h3>Pets Paw</h3>
 		<table class="table table-bordered" id="breeds">
 			<caption></caption>
 			<thead>
